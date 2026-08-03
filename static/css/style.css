@@ -1,0 +1,72 @@
+body{
+    background:#f4f7fc;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.hero{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:50px;
+    font-weight:bold;
+}
+
+.hero p{
+    font-size:20px;
+    color:gray;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+    box-shadow:0px 5px 20px rgba(0,0,0,.1);
+}
+
+.btn{
+    border-radius:10px;
+}
+
+.form-control{
+    border-radius:10px;
+}
+body{
+
+    background: linear-gradient(
+        135deg,
+        #eef2ff,
+        #dbeafe
+    );
+
+    min-height:100vh;
+
+    font-family:'Segoe UI',sans-serif;
+
+}
+
+/* Card Animation */
+
+.card{
+
+    transition:0.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* Button Design */
+
+.btn{
+
+    border-radius:12px;
+
+    padding:12px;
+
+    font-weight:bold;
+
+}

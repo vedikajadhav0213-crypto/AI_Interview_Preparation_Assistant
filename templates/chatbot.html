@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>AI Interview Chatbot</title>
+
+<style>
+
+body{
+    background:#f4f6f9;
+    font-family:Arial;
+}
+
+.container{
+
+    width:700px;
+
+    margin:auto;
+
+    margin-top:40px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:10px;
+
+    box-shadow:0px 0px 10px lightgray;
+}
+
+input{
+
+    width:100%;
+
+    padding:12px;
+
+    font-size:18px;
+}
+
+button{
+
+    margin-top:15px;
+
+    padding:12px 20px;
+
+    background:#3498db;
+
+    color:white;
+
+    border:none;
+
+    cursor:pointer;
+}
+
+.answer{
+
+    margin-top:30px;
+
+    background:#ecf0f1;
+
+    padding:20px;
+
+    border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Interview Chatbot</h1>
+
+<form method="POST">
+
+<input
+type="text"
+name="question"
+placeholder="Ask any interview question..."
+required>
+
+<br>
+
+<button type="submit">
+
+Ask AI
+
+</button>
+
+</form>
+
+{% if answer %}
+
+<div class="answer">
+
+<h3>Answer</h3>
+
+<p>{{ answer }}</p>
+
+</div>
+
+{% endif %}
+
+<br>
+
+<a href="{{ url_for('dashboard') }}">
+
+<button>
+
+Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+</body>
+
+</html>

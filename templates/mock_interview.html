@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mock Interview</title>
+</head>
+<body>
+
+<h2>AI Mock Interview</h2>
+
+<form method="POST">
+
+    {% for question in questions %}
+
+        <p><b>{{ loop.index }}. {{ question["question"] }}</b></p>
+
+        <textarea
+            name="answer{{ question['id'] }}"
+            rows="4"
+            cols="60"
+            placeholder="Type your answer here..."
+        ></textarea>
+
+        <br><br>
+
+    {% endfor %}
+
+    <button type="submit">Submit Answers</button>
+
+</form>
+
+</body>
+</html>

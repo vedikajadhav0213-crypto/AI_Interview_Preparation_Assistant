@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Interview Result</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f5f5f5;
+            text-align:center;
+        }
+
+        .box{
+            width:650px;
+            margin:40px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px lightgray;
+        }
+
+        h1{
+            color:#2c3e50;
+        }
+
+        h2{
+            color:#27ae60;
+        }
+
+        ul{
+            text-align:left;
+            display:inline-block;
+            font-size:18px;
+        }
+
+        button{
+            background:#3498db;
+            color:white;
+            padding:12px 25px;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#2980b9;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>AI Interview Result</h1>
+
+<hr>
+
+<h2>Interview Score : {{ score }}%</h2>
+
+<hr>
+
+<h2>Interview Rating</h2>
+
+<h3>{{ rating }}</h3>
+
+<hr>
+
+<h2>Strengths</h2>
+
+<ul>
+
+{% for item in strengths %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<h2>Weaknesses</h2>
+
+<ul>
+
+{% for item in weaknesses %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<hr>
+
+<h2>Interview Readiness</h2>
+
+<h3>{{ status }}</h3>
+
+<h2>Recommended Next Steps</h2>
+
+<ul>
+
+{% for item in advice %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+<h2>Improvement Tips</h2>
+
+<ul>
+
+{% for item in tips %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+<h2>Performance : {{ performance }}</h2>
+
+<h3>Feedback</h3>
+
+<ul>
+
+{% for item in feedback %}
+
+<li>{{ item }}</li>
+
+{% endfor %}
+
+</ul>
+
+<br><br>
+
+<a href="{{ url_for('dashboard') }}">
+
+<button>Back to Dashboard</button>
+<br><br>
+
+<br><br>
+
+<a href="{{ url_for('download_report') }}">
+    <button>Download PDF Report</button>
+</a>
+
+<br><br>
+
+<a href="{{ url_for('send_email') }}">
+    <button>Send Report to Email</button>
+</a>
+
+<a href="{{ url_for('certificate') }}">
+    <button>🏆 Download Certificate</button>
+</a>
+
+</div>
+
+</body>
+
+</html>

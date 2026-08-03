@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Voice Interview</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f4f4f4;
+            text-align:center;
+            margin-top:40px;
+        }
+
+        textarea{
+            width:80%;
+            height:180px;
+            font-size:18px;
+        }
+
+        button{
+            padding:12px 25px;
+            font-size:18px;
+            background:#3498db;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>🎤 AI Voice Interview</h1>
+
+<button onclick="startRecognition()">
+Start Speaking
+</button>
+
+<br><br>
+
+<textarea id="answer"
+placeholder="Your speech will appear here..."></textarea>
+
+<script>
+
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+if(!SpeechRecognition){
+
+    alert("Please use Google Chrome or Microsoft Edge.");
+
+}else{
+
+const recognition = new SpeechRecognition();
+
+recognition.lang = "en-US";
+
+recognition.interimResults = false;
+
+recognition.maxAlternatives = 1;
+
+recognition.onresult = function(event){
+
+document.getElementById("answer").value =
+event.results[0][0].transcript;
+
+};
+
+window.startRecognition = function(){
+
+recognition.start();
+
+};
+
+}
+
+</script>
+
+</body>
+
+</html>

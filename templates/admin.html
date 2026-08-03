@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Admin Panel</title>
+
+<style>
+
+body{
+
+    font-family:Arial;
+    background:#f2f2f2;
+
+}
+
+.container{
+
+    width:95%;
+    margin:auto;
+    margin-top:30px;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+
+}
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+th{
+
+    background:#3498db;
+    color:white;
+    padding:12px;
+
+}
+
+td{
+
+    border:1px solid #ddd;
+    padding:12px;
+    text-align:center;
+
+}
+
+tr:nth-child(even){
+
+    background:#f9f9f9;
+
+}
+
+h1{
+
+    text-align:center;
+
+}
+
+button{
+
+    padding:10px 20px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:5px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Admin Dashboard</h1>
+
+<table>
+
+<tr>
+
+<th>ID</th>
+
+<th>Name</th>
+
+<th>Email</th>
+
+<th>ATS Score</th>
+
+<th>Interview Score</th>
+
+<th>Date</th>
+
+</tr>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user["id"] }}</td>
+
+<td>{{ user["name"] }}</td>
+
+<td>{{ user["email"] }}</td>
+
+<td>{{ user["ats_score"] or "-" }}</td>
+
+<td>{{ user["interview_score"] or "-" }}</td>
+
+<td>{{ user["interview_date"] or "-" }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="{{ url_for('dashboard') }}">
+<button>Back</button>
+</a>
+
+</div>
+
+</body>
+
+</html>

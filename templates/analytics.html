@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>const dates
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Analytics</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6f9;
+            margin:0;
+            padding:30px;
+            text-align:center;
+        }
+
+        h1{
+            color:#2c3e50;
+            margin-bottom:30px;
+        }
+
+        .container{
+            display:flex;
+            justify-content:center;
+            gap:25px;
+            flex-wrap:wrap;
+            margin-bottom:40px;
+        }
+
+        .card{
+            width:220px;
+            background:white;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 0 12px rgba(0,0,0,0.15);
+        }
+
+        .card h2{
+            color:#3498db;
+            font-size:35px;
+            margin:10px 0;
+        }
+
+        .card p{
+            font-size:18px;
+            font-weight:bold;
+        }
+
+        .chart-box{
+            width:80%;
+            max-width:900px;
+            margin:auto;
+            background:white;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 0 12px rgba(0,0,0,0.15);
+        }
+
+        button{
+            margin-top:30px;
+            padding:12px 25px;
+            font-size:16px;
+            border:none;
+            border-radius:6px;
+            background:#3498db;
+            color:white;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#2980b9;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>Dashboard Analytics</h1>
+
+<div class="container">
+
+    <div class="card">
+        <h2>{{ total_users }}</h2>
+        <p>Total Users</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ total_interviews }}</h2>
+        <p>Total Interviews</p>
+    </div>
+
+    <div class="card">
+        <h2>{{ average_score }}%</h2>
+        <p>Average Score</p>
+    </div>
+
+</div>
+
+<div class="chart-box">
+
+    <canvas id="myChart"></canvas>
+
+</div>
+
+<script>
+
+const chartDates = JSON.parse('{{ dates|tojson|safe }}');
+const chartScores = JSON.parse('{{ scores|tojson|safe }}');
+
+const ctx = document.getElementById("myChart").getContext("2d");
+
+new Chart(ctx, {
+
+    type: "line",
+
+    data: {
+
+        labels: chartDates,
+
+        datasets: [{
+
+            label: "Interview Score",
+
+            data: scores,
+
+            borderColor: "#3498db",
+
+            backgroundColor: "rgba(52,152,219,0.2)",
+
+            fill: true,
+
+            tension: 0.4,
+
+            pointRadius: 5,
+
+            pointBackgroundColor: "#3498db"
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                display: true
+
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                max: 100,
+
+                title: {
+
+                    display: true,
+
+                    text: "Interview Score (%)"
+
+                }
+
+            },
+
+            x: {
+
+                title: {
+
+                    display: true,
+
+                    text: "Interview Date"
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+<br><br>
+
+<a href="{{ url_for('dashboard') }}">
+    <button>⬅ Back to Dashboard</button>
+</a>
+
+</body>
+
+</html>

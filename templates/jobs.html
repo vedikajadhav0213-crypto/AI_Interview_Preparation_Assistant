@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>AI Job Recommendation</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f6f9;
+}
+
+.container{
+
+    width:800px;
+    margin:auto;
+    margin-top:40px;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+
+}
+
+h1{
+    text-align:center;
+    color:#2c3e50;
+}
+
+.score{
+
+    font-size:20px;
+    margin:20px 0;
+
+}
+
+ul{
+
+    font-size:18px;
+
+}
+
+li{
+
+    padding:10px;
+
+}
+
+button{
+
+    padding:10px 20px;
+    margin-top:20px;
+    background:#3498db;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+
+}
+
+button:hover{
+
+    background:#2980b9;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Job Recommendation</h1>
+
+<div class="score">
+
+<p><b>ATS Score:</b> {{ ats_score }}%</p>
+
+<p><b>Interview Score:</b> {{ interview_score }}%</p>
+
+</div>
+
+<h2>Recommended Jobs</h2>
+
+<ul>
+
+{% for job in jobs %}
+
+<li>{{ job }}</li>
+
+{% endfor %}
+
+</ul>
+
+<a href="{{ url_for('dashboard') }}">
+
+<button>Back to Dashboard</button>
+
+</a>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Interview History</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f4f6f9;
+            margin:0;
+            padding:40px;
+        }
+
+        .container{
+            width:900px;
+            margin:auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+
+        h1{
+            text-align:center;
+            color:#2c3e50;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th{
+            background:#3498db;
+            color:white;
+            padding:12px;
+        }
+
+        td{
+            padding:12px;
+            text-align:center;
+            border:1px solid #ddd;
+        }
+
+        button{
+
+            padding:10px 20px;
+            margin-top:20px;
+            background:#3498db;
+            color:white;
+            border:none;
+            cursor:pointer;
+            border-radius:5px;
+
+        }
+
+        button:hover{
+
+            background:#2980b9;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Interview History</h1>
+
+<table>
+
+<tr>
+
+<th>Date</th>
+
+<th>ATS Score</th>
+
+<th>Interview Score</th>
+
+</tr>
+
+{% for row in history %}
+
+<tr>
+
+<td>{{ row["interview_date"] }}</td>
+
+<td>{{ row["ats_score"] }}%</td>
+
+<td>{{ row["interview_score"] }}%</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<a href="{{ url_for('dashboard') }}">
+
+<button>Back to Dashboard</button>
+
+</a>
+
+</div>
+
+</body>
+
+</html>
