@@ -370,9 +370,6 @@ def upload():
 # ---------------------------------------------------
 # ATS Score
 # ---------------------------------------------------
-# ---------------------------------------------------
-# ATS Score Page
-# ---------------------------------------------------
 
 @app.route("/ats")
 def ats():
@@ -601,6 +598,8 @@ def download_report():
 
     return send_file(pdf, as_attachment=True)
 
+
+
 @app.route("/chatbot", methods=["GET", "POST"])
 def chatbot():
 
@@ -618,28 +617,6 @@ def chatbot():
     return render_template(
         "chatbot.html",
         answer=answer
-    )
-
-@app.route("/certificate")
-def certificate():
-
-    if "user_id" not in session:
-        return redirect(url_for("login"))
-
-    name = session.get("user_name", "User")
-    score = session.get("interview_score", 0)
-
-    filename = "static/certificate.pdf"
-
-    generate_certificate(
-        name,
-        score,
-        filename
-    )
-
-    return send_file(
-        filename,
-        as_attachment=True
     )
 
 # ---------------------------------------------------
@@ -683,22 +660,28 @@ def history():
         history=history
     )
 
+
 @app.route("/certificate")
 def certificate():
 
     if "user_id" not in session:
         return redirect(url_for("login"))
 
-    generate_certificate(
-        session["user_name"],
-        session.get("interview_score", 0),
-        session.get("performance", "Good")
-    )
+    # Create reports folder if it doesn't exist
+    os.makedirs("reports", exist_ok=True)
 
-    return send_file(
-        "reports/certificate.pdf",
-        as_attachment=True
-    )
+    filename = os.path.join("reports", "certificate.pdf")
+
+    # Get user information
+    name = session.get("user_name", "Student")
+    score = session.get("interview_score", 0)
+
+    # Generate the certificate
+    generate_certificate(name, score, filename)
+
+    # Download the generated PDF
+    return send_file(filename, as_attachment=True)
+
 
 # ---------------------------------------------------
 # Job Recommendation

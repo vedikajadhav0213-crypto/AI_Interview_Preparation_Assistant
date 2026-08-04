@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>const dates
+<head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +53,7 @@
         }
 
         .chart-box{
-            width:80%;
+            width:85%;
             max-width:900px;
             margin:auto;
             background:white;
@@ -112,8 +112,11 @@
 
 <script>
 
-const chartDates = JSON.parse('{{ dates|tojson|safe }}');
-const chartScores = JSON.parse('{{ scores|tojson|safe }}');
+const chartDates = {{ dates|tojson }};
+const chartScores = {{ scores|tojson }};
+
+console.log("Dates:", chartDates);
+console.log("Scores:", chartScores);
 
 const ctx = document.getElementById("myChart").getContext("2d");
 
@@ -129,7 +132,7 @@ new Chart(ctx, {
 
             label: "Interview Score",
 
-            data: scores,
+            data: chartScores,
 
             borderColor: "#3498db",
 
@@ -206,5 +209,4 @@ new Chart(ctx, {
 </a>
 
 </body>
-
 </html>

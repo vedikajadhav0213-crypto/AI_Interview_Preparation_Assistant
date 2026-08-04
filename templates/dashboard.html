@@ -13,56 +13,55 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
 
-        .dark-mode{
-    background:#1e1e1e !important;
-    color:white !important;
-}
-
-.dark-mode .card{
-    background:#2c2c2c;
-    color:white;
-}
-
-.dark-mode h1,
-.dark-mode h2,
-.dark-mode h3,
-.dark-mode h5,
-.dark-mode p{
-    color:white;
-}
-
         body{
             background:#f4f6f9;
-            font-family:Arial, sans-serif;
+            font-family:Arial,Helvetica,sans-serif;
+            transition:.4s;
         }
 
         .dashboard-card{
+
             border:none;
             border-radius:15px;
-            box-shadow:0px 4px 15px rgba(0,0,0,0.1);
-            transition:0.3s;
+            box-shadow:0 5px 15px rgba(0,0,0,.15);
+            transition:.3s;
         }
 
         .dashboard-card:hover{
+
             transform:translateY(-6px);
         }
 
         .dashboard-card i{
+
             font-size:45px;
-            margin-bottom:15px;
         }
 
         .dashboard-card h2{
+
             font-weight:bold;
         }
 
-        .btn{
-            border-radius:10px;
-            font-weight:bold;
+        .dashboard-btn{
+
+            width:100%;
+            margin-top:10px;
+        }
+
+        .dark-mode{
+
+            background:#121212;
+            color:white;
+        }
+
+        .dark-mode .card{
+
+            background:#1f1f1f;
+            color:white;
         }
 
     </style>
@@ -73,69 +72,43 @@
 
 <div class="container mt-5">
 
-    <div class="text-center mb-5">
-
-        <h1 class="fw-bold text-primary">
-            <i class="fa-solid fa-user-graduate"></i>
-            <body>
-
-<div class="container mt-5">
+    <!-- Heading -->
 
     <div class="text-center mb-5">
 
         <h1 class="fw-bold text-primary">
+
             <i class="fa-solid fa-user-graduate"></i>
-            {{ session["username"] }}
+
+            {{ session["user_name"] }}
+
         </h1>
 
         <p class="text-secondary">
-            AI Interview Preparation Assistant
-        </p>
 
-    </div>
-        </h1>
-
-        <p class="text-secondary">
             AI Interview Preparation Assistant
+
         </p>
 
     </div>
 
-    <!-- KPI Cards -->
+    <!-- Cards -->
 
     <div class="row g-4">
 
         <div class="col-md-3">
 
-            <div class="card dashboard-card">
+            <div class="card dashboard-card text-center p-4">
 
-                <div class="card-body text-center">
+                <i class="fa-solid fa-file-lines text-primary"></i>
 
-                    <i class="fa-solid fa-file-lines text-primary"></i>
+                <h5 class="mt-3">ATS Score</h5>
 
-                    <h5>ATS Score</h5>
+                <h2 class="text-primary">
 
-                    <h2 class="text-primary">{{ ats_score }}%</h2>
+                    {{ ats_score }}%
 
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="card dashboard-card">
-
-                <div class="card-body text-center">
-
-                    <i class="fa-solid fa-microphone text-success"></i>
-
-                    <h5>Interview Score</h5>
-
-                    <h2 class="text-success">{{ interview_score }}%</h2>
-
-                </div>
+                </h2>
 
             </div>
 
@@ -143,17 +116,17 @@
 
         <div class="col-md-3">
 
-            <div class="card dashboard-card">
+            <div class="card dashboard-card text-center p-4">
 
-                <div class="card-body text-center">
+                <i class="fa-solid fa-microphone text-success"></i>
 
-                    <i class="fa-solid fa-code text-warning"></i>
+                <h5 class="mt-3">Interview Score</h5>
 
-                    <h5>Skills Found</h5>
+                <h2 class="text-success">
 
-                    <h2 class="text-warning">{{ skills_count }}</h2>
+                    {{ interview_score }}%
 
-                </div>
+                </h2>
 
             </div>
 
@@ -161,17 +134,35 @@
 
         <div class="col-md-3">
 
-            <div class="card dashboard-card">
+            <div class="card dashboard-card text-center p-4">
 
-                <div class="card-body text-center">
+                <i class="fa-solid fa-code text-warning"></i>
 
-                    <i class="fa-solid fa-chart-line text-danger"></i>
+                <h5 class="mt-3">Skills Found</h5>
 
-                    <h5>Performance</h5>
+                <h2 class="text-warning">
 
-                    <h2 class="text-danger">{{ performance }}</h2>
+                    {{ skill_count }}
 
-                </div>
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card dashboard-card text-center p-4">
+
+                <i class="fa-solid fa-chart-line text-danger"></i>
+
+                <h5 class="mt-3">Performance</h5>
+
+                <h2 class="text-danger">
+
+                    {{ performance }}
+
+                </h2>
 
             </div>
 
@@ -181,111 +172,157 @@
 
     <!-- Buttons -->
 
-    <div class="row mt-5 g-3">
+    <div class="row mt-5">
 
         <div class="col-md-3">
-            <a href="{{ url_for('upload') }}" class="btn btn-primary w-100">
-                <i class="fa-solid fa-upload"></i> Upload Resume
-            </a>
-        </div>
 
-        <div class="col-md-3">
-            <a href="{{ url_for('ats') }}" class="btn btn-success w-100">
-                <i class="fa-solid fa-chart-column"></i> ATS Report
+            <a href="{{ url_for('upload') }}" class="btn btn-primary dashboard-btn">
+                <i class="fa-solid fa-upload"></i>
+                Upload Resume
             </a>
-        </div>
 
-        <div class="col-md-3">
-            <a href="{{ url_for('mock_interview') }}" class="btn btn-warning w-100">
-                <i class="fa-solid fa-comments"></i> Mock Interview
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a href="{{ url_for('voice_interview') }}" class="btn btn-info w-100">
-                <i class="fa-solid fa-microphone"></i> Voice Interview
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a href="{{ url_for('history') }}" class="btn btn-secondary w-100">
-                <i class="fa-solid fa-clock-rotate-left"></i> Interview History
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a href="{{ url_for('jobs') }}" class="btn btn-dark w-100">
-                <i class="fa-solid fa-briefcase"></i> Job Recommendation
-            </a>
-        </div>
-
-        <div class="col-md-3">
-            <a href="{{ url_for('analytics') }}" class="btn btn-primary w-100">
-                <i class="fa-solid fa-chart-pie"></i> Analytics
-            </a>
-        </div>
-
-        <a href="{{ url_for('job_match') }}" class="btn btn-success m-2">
-    Resume vs Job Description
-</a>
-
-        <div class="col-md-3">
-            <a href="{{ url_for('admin') }}" class="btn btn-danger w-100">
-                <i class="fa-solid fa-user-shield"></i> Admin Panel
-            </a>
         </div>
 
         <div class="col-md-3">
 
-<a
-href="{{ url_for('profile') }}"
-class="btn btn-secondary w-100">
+            <a href="{{ url_for('ats') }}" class="btn btn-success dashboard-btn">
+                <i class="fa-solid fa-chart-column"></i>
+                ATS Report
+            </a>
 
-👤 My Profile
+        </div>
 
-</a>
+        <div class="col-md-3">
+
+            <a href="{{ url_for('mock_interview') }}" class="btn btn-warning dashboard-btn">
+                <i class="fa-solid fa-comments"></i>
+                Mock Interview
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('voice_interview') }}" class="btn btn-info dashboard-btn">
+                <i class="fa-solid fa-microphone"></i>
+                Voice Interview
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('history') }}" class="btn btn-secondary dashboard-btn">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                Interview History
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('jobs') }}" class="btn btn-dark dashboard-btn">
+                <i class="fa-solid fa-briefcase"></i>
+                Job Recommendation
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('analytics') }}" class="btn btn-primary dashboard-btn">
+                <i class="fa-solid fa-chart-simple"></i>
+                Analytics
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('job_match') }}" class="btn btn-success dashboard-btn">
+                <i class="fa-solid fa-file-circle-check"></i>
+                Resume vs JD
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('admin') }}" class="btn btn-danger dashboard-btn">
+                <i class="fa-solid fa-user-shield"></i>
+                Admin Panel
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('profile') }}" class="btn btn-secondary dashboard-btn">
+                <i class="fa-solid fa-user"></i>
+                My Profile
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('chatbot') }}" class="btn btn-info dashboard-btn">
+                <i class="fa-solid fa-robot"></i>
+                AI Chatbot
+            </a>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <a href="{{ url_for('certificate') }}" class="btn btn-success dashboard-btn">
+                <i class="fa-solid fa-award"></i>
+                Certificate
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Dark Mode -->
+
+    <div class="text-center mt-5">
+
+        <button id="darkModeBtn" class="btn btn-dark">
+
+            🌙 Toggle Dark Mode
+
+        </button>
+
+    </div>
+
+    <!-- Logout -->
+
+    <div class="text-center mt-4 mb-5">
+
+        <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-lg">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+    </div>
 
 </div>
 
-        <div class="col-md-3">
-            <a href="{{ url_for('chatbot') }}" class="btn btn-info w-100">
-                <i class="fa-solid fa-robot"></i> AI Chatbot
-            </a>
-        </div>
+<script>
 
-        <div class="text-center mt-4">
+const btn=document.getElementById("darkModeBtn");
 
-<button id="darkModeBtn" class="btn btn-dark">
-
-    <script>
-
-const btn = document.getElementById("darkModeBtn");
-
-btn.onclick = function(){
+btn.onclick=function(){
 
     document.body.classList.toggle("dark-mode");
 
 }
 
 </script>
-
-🌙 Toggle Dark Mode
-
-</button>
-
-</div>
-
-        <div class="col-md-3">
-            <a href="{{ url_for('logout') }}" class="btn btn-outline-danger w-100">
-                <i class="fa-solid fa-right-from-bracket"></i> Logout
-            </a>
-        </div>
-
-    </div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
