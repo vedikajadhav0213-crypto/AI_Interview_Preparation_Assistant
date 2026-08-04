@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="UTF-8">
@@ -110,45 +109,46 @@
 
 </div>
 
+<a href="{{ url_for('dashboard') }}">
+    <button>⬅ Back to Dashboard</button>
+</a>
+
+<!-- Store Flask data as JSON -->
+
+<script id="chart-data" type="application/json">
+{{ {
+    "dates": dates,
+    "scores": scores
+}|tojson }}
+</script>
+
 <script>
+const chartData = JSON.parse(
+    document.getElementById("chart-data").textContent
+);
 
-const chartDates = {{ dates|tojson }};
-const chartScores = {{ scores|tojson }};
-
-console.log("Dates:", chartDates);
-console.log("Scores:", chartScores);
+const chartDates = chartData.dates;
+const chartScores = chartData.scores;
 
 const ctx = document.getElementById("myChart").getContext("2d");
 
 new Chart(ctx, {
-
     type: "line",
-
     data: {
-
         labels: chartDates,
-
         datasets: [{
-
             label: "Interview Score",
-
             data: chartScores,
-
             borderColor: "#3498db",
-
             backgroundColor: "rgba(52,152,219,0.2)",
-
             fill: true,
-
-            tension: 0.4,
-
-            pointRadius: 5,
-
-            pointBackgroundColor: "#3498db"
-
+            tension: 0.4
         }]
+    }
+});
+</script>
 
-    },
+
 
     options: {
 
@@ -176,7 +176,7 @@ new Chart(ctx, {
 
                     display: true,
 
-                    text: "Interview Score (%)"
+                    text: 'Interview Score (%)'
 
                 }
 
@@ -188,7 +188,7 @@ new Chart(ctx, {
 
                     display: true,
 
-                    text: "Interview Date"
+                    text: 'Interview Date'
 
                 }
 
@@ -201,12 +201,6 @@ new Chart(ctx, {
 });
 
 </script>
-
-<br><br>
-
-<a href="{{ url_for('dashboard') }}">
-    <button>⬅ Back to Dashboard</button>
-</a>
 
 </body>
 </html>
